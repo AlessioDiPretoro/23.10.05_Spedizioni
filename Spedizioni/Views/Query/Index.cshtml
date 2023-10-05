@@ -22,7 +22,7 @@
             $('#today').click(function () {
                 $.ajax({
                     method: "GET",
-                    url: "ShippingsToday",
+                    url: "Query/ShippingsToday",
                     success: function (data) {
                         $('#result').html("")
                         $('#result').append("<p>Risultati per spedizioni in consegna oggi</p>")
@@ -35,7 +35,7 @@
             $('#inDelivery').click(function () {
                 $.ajax({
                     method: "GET",
-                    url: "InDelivery",
+                    url: "Query/InDelivery",
                     success: function (data) {
                         $('#result').html("")
                         $('#result').append("<p>Risultati per numero spedizioni in attesa di consegna</p>")
@@ -47,7 +47,7 @@
             $('#city').click(function () {
                 $.ajax({
                     method: "GET",
-                    url: "ShippingsTodayByCity",
+                    url: "Query/ShippingsTodayByCity",
                     success: function (data) {
                         $('#result').html("")
                         $('#result').append("<p>Risultati per spedizioni per città</p>")
