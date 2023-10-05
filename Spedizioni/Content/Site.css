@@ -1,0 +1,85 @@
+﻿/*FONTS*/
+@import url('https://fonts.googleapis.com/css2?family=Young+Serif&display=swap');
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*
+input,
+select,
+textarea {
+    max-width: 280px;
+}*/
+
+
+
+
+body {
+    font-family: 'Young Serif', serif;
+}
+nav {
+    background: #ff8100;
+}
+
+footer {
+    text-align: center;
+    background: #ff8100;
+    padding: 0.8em;
+    color: #ffc68c;
+}
+h1 {
+    margin-top: 0.3em;
+}
+h1, h2 {
+    text-align: center;
+    
+}
+
+td {
+    vertical-align: middle;
+}
+a {
+    text-decoration: none;
+    color: #ffc68c;
+}
+
+.homeImg{
+    max-width: 500px;
+    margin: 0.5em
+}
+.dropdown-menu {
+    background: #ff8100;
+}
+.dropdown-item {
+    color: #ffc68c;
+}
+.btn-ok {
+    background: #ff8100;
+    color: white;
+}
+
+input, select {
+    border: 1px solid #ff8100 !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .containerForm {
+        width: 100%
+    }
+}
+@media only screen and (min-width: 750px) {
+    .containerForm {
+        width: 50%
+    }
+} 

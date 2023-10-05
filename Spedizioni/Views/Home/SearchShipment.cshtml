@@ -1,0 +1,94 @@
+﻿@model Spedizioni.Models.Search
+@{
+    ViewBag.Title = "SearchShipment";
+}
+
+<h1>Ricerca spedizione</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="container containerForm">
+        <div class="form-check">
+            <p class="text-center">Selezionare se privato o azienda</p>
+            <div class="text-center">
+                @Html.RadioButtonFor(model => model.isPrivate, "True", new { htmlAttributes = new { @class = "form-control d-flex justify-content-end" }, id = "PrivateChecked", @checked = true }) Privato
+                @Html.RadioButtonFor(model => model.isPrivate, "False", new { htmlAttributes = new { @class = "form-control d-flex" }, id = "PrivateNotChecked" })  Azienda
+                @Html.ValidationMessageFor(model => model.isPrivate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-2">
+
+            <div class="form-group" id="cfiscGroup">
+                @Html.LabelFor(model => model.codFisc, htmlAttributes: new { @class = "control-label" })
+                <div class="">
+                    @Html.EditorFor(model => model.codFisc, new { htmlAttributes = new { @class = "form-control", @id = "FiscText" } })
+                    @Html.ValidationMessageFor(model => model.codFisc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group d-none" id="pivaGroup">
+                @Html.LabelFor(model => model.pIva, htmlAttributes: new { @class = "control-label" })
+                <div class="">
+                    @Html.EditorFor(model => model.pIva, new { htmlAttributes = new { @class = "form-control", @id = "PIvaText" } })
+                    @Html.ValidationMessageFor(model => model.pIva, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.code, htmlAttributes: new { @class = "control-label" })
+                <div class="">
+                    @Html.EditorFor(model => model.code, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.code, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="mt-2 d-flex justify-content-center">
+            <input type="submit" value="Cerca spedizione" class="btn btn-ok w-100" />
+        </div>
+    </div>
+}
+@{
+    if (Model != null && Model.code != null)
+    {
+
+        Html.RenderAction("GetShipmentPartial", new { s = Model });
+    }
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#PrivateChecked').change(function () {
+                if ($('#PrivateChecked').is(':checked')) {
+                    $("#pivaGroup").toggleClass('d-none');
+                    $("#cfiscGroup").toggleClass('d-block');
+                    $("#cfiscGroup").toggleClass('d-none');
+                    $("#PIvaText").val('');
+                }
+            })
+            $('#PrivateNotChecked').change(function () {
+                if ($('#PrivateNotChecked').is(':checked')) {
+                    $("#pivaGroup").toggleClass('d-block');
+                    $("#pivaGroup").toggleClass('d-none');
+                    $("#cfiscGroup").toggleClass('d-none');
+                    $("#FiscText").val('');
+                }
+            })
+            if ($('#PrivateChecked').is(':checked')) {
+                $("#pivaGroup").addClass('d-none');
+                $("#cfiscGroup").addClass('d-block');
+                $("#cfiscGroup").removeClass('d-none');
+                $("#PIvaText").val('');
+            }
+            if ($('#PrivateNotChecked').is(':checked')) {
+                $("#pivaGroup").addClass('d-block');
+                $("#pivaGroup").removeClass('d-none');
+                $("#cfiscGroup").addClass('d-none');
+                $("#FiscText").val('');
+            }
+        })
+    </script>
+}

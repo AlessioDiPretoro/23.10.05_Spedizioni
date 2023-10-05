@@ -1,0 +1,100 @@
+﻿@model Spedizioni.Models.Users
+@{
+    ViewBag.Title = "CreateClient";
+}
+
+<h1>Aggiungi cliente</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="container containerForm">
+        <div class="row row-cols-1 row-cols-md-2">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label" })
+                <div class="">
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                <div class="">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                <div class="">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label" })
+                <div class="">
+                    @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-check">
+                Selezionare se privato o azienda
+                <div class="">
+                    @Html.RadioButtonFor(model => model.IsPrivate, "True", new { htmlAttributes = new { @class = "form-control" }, id = "PrivateChecked" }) Privato
+                    @Html.RadioButtonFor(model => model.IsPrivate, "False", new { htmlAttributes = new { @class = "form-control" }, id = "PrivateNotChecked" })  Azienda
+                    @Html.ValidationMessageFor(model => model.IsPrivate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div></div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CFisc, htmlAttributes: new { @class = "control-label" })
+                <div class="">
+                    @Html.TextBoxFor(model => model.CFisc, new { @class = "form-control", @id = "CFiscText" })
+                    @Html.ValidationMessageFor(model => model.CFisc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PIva, htmlAttributes: new { @class = "control-label" })
+                <div class="">
+                    @Html.TextBoxFor(model => model.PIva, new { @class = "form-control", @id = "PIvaText" })
+                    @Html.ValidationMessageFor(model => model.PIva, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="mt-2 d-flex justify-content-center">
+            <input type="submit" value="Crea Cliente" class="btn btn-ok w-100" />
+        </div>
+    </div>
+    if (ViewBag.MessaggioDiErrore != null)
+    {
+        <div class="alert alert-danger mt-2 text-center">
+            @ViewBag.MessaggioDiErrore
+        </div>
+    }
+
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#PrivateChecked').change(function () {
+                if ($('#PrivateChecked').is(':checked')) {
+                    $("#CFiscText").attr('disabled', false);
+                    $("#PIvaText").attr('disabled', true);
+                    $("#PIvaText").val('');
+                }
+            });
+            $('#PrivateNotChecked').change(function () {
+                if ($('#PrivateNotChecked').is(':checked')) {
+                    $("#CFiscText").val('');
+                    $("#CFiscText").attr('disabled', true);
+                    $("#PIvaText").attr('disabled', false);
+                }
+            })
+        })
+    </script>
+}

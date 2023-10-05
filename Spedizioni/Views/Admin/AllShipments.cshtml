@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Spedizioni.Models.Shipments>
+
+@{
+    ViewBag.Title = "AllShipments";
+}
+
+<h1>Gestione spedizioni</h1>
+
+<div>
+    <table class="table table-hover table-bordered container text-center">
+        <tr>
+            <th>Codice spedizione</th>
+            <th>Mittente</th>
+            <th>Indirizzo Destinazione</th>
+            <th>Città Destinazione</th>
+            <th>Data di Spedizione</th>
+            <th>Gestione</th>
+        </tr>
+        @foreach (Spedizioni.Models.Shipments s in Model)
+        {
+            <tr>
+                <td>@s.Code</td>
+                <td>@s.sender.Surname @s.sender.Name</td>
+                <td>@s.DestinationAddress</td>
+                <td>@s.DestinationCity</td>
+                <td>@s.ShippingDate.ToShortDateString()</td>
+                <td>
+                    @Html.ActionLink("➕", "CreateDetails", "Admin", new { id = s.IdShipping }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("✒", "EditShipment", "Admin", new { id = s.IdShipping }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("🗑", "DeleteShipment", "Admin", new { id = s.IdShipping }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<!-- Modal NON riesco a passare il valore id nel modale o a creare un modale per ogni elemento del model -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Elimina spedizione</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Sicuro di voler eliminare la spedizione? L'operazione sarà definitiva
+            </div>
+            <div class="modal-footer">
+
+                <input type="hidden" id="shipmentId" name="shipmentId" />
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿@model Spedizioni.Models.Shipments
+@{
+    ViewBag.Title = "CreateDetails";
+}
+
+<h1>Aggiungi dettagli</h1>
+<h3 class="text-center">per la spedizione n°: @Model.Code</h3>
+<p class="text-center">Mittente: @Model.sender.Surname @Model.sender.Name - Destiazione: @Model.DestinationCity, @Model.DestinationAddress</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3">
+
+            @Html.Hidden("IdShipping")
+            @Html.HiddenFor(m => m.IdShipping)
+
+            <div class="form-group">
+                Seleziona  @Html.LabelFor(model => model.detail.State, htmlAttributes: new { @class = "control-label" })
+                <div class="">
+                    @Html.DropDownListFor(model => model.detail.State, new SelectList(ViewBag.AllStates, "Text", "Text"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.detail.State, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.detail.CurrentLocation, htmlAttributes: new { @class = "control-label" })
+                <div class="">
+                    @Html.EditorFor(model => model.detail.CurrentLocation, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.detail.CurrentLocation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.detail.Description, htmlAttributes: new { @class = "control-label" })
+                <div class="">
+                    @Html.EditorFor(model => model.detail.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.detail.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group mt-2 d-flex justify-content-center">
+            <input type="submit" value="Aggiungi dettagli" class="btn btn-ok" />
+        </div>
+        @if (ViewBag.messageValid != null)
+        {
+            <div>
+                <p class="alert alert-success mt-2 text-center">@ViewBag.messageValid</p>
+            </div>
+        }
+        @if (ViewBag.messageError != null)
+        {
+            <div>
+                <p class="alert alert-danger mt-2 text-center">@ViewBag.messageError</p>
+            </div>
+        }
+    </div>
+}
+
+@{
+    Html.RenderAction("GetPartialDetail", new { id = Model.IdShipping });
+
+}

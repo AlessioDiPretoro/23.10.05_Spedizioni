@@ -1,0 +1,41 @@
+﻿﻿@model Spedizioni.Models.Users
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<div class="container d-flex justify-content-center">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @{Html.EnableClientValidation(false);}
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mt-2 d-flex justify-content-center">
+            <input type="submit" value="Login" class="btn btn-ok w-100" />
+        </div>
+        if (ViewBag.AuthError != null)
+        {
+            <div class="alert alert-danger mt-2">
+                @ViewBag.AuthError
+            </div>
+        }
+    }
+
+</div>

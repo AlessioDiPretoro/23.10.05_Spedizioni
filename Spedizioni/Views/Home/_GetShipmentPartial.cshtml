@@ -1,0 +1,42 @@
+﻿@model Spedizioni.Models.Shipments
+
+@if (Model != null && Model.RecipientName != null)
+{
+
+    <div class="mt-3">
+        <h4 class="text-center">Risultati ricerca</h4>
+        <hr />
+        <table class="table table-hover table-bordered container text-center">
+            <tr>
+                <th>Mittente</th>
+                <th>Destinatario</th>
+                <th>Indirizzo Destinazione</th>
+                <th>Città Destinazione</th>
+                <th>Data di Spedizione</th>
+                <th>Data di Consegna</th>
+                <th>Prezzo</th>
+                <th>Peso</th>
+            </tr>
+            <tr>
+                <td>@Model.sender.Surname @Model.sender.Name</td>
+                <td>@Model.RecipientName</td>
+                <td>@Model.DestinationAddress</td>
+                <td>@Model.DestinationCity</td>
+                <td>@Model.ShippingDate.ToShortDateString()</td>
+                <td>@Model.DeliveryDate.ToShortDateString()</td>
+                <td>@Model.Price.ToString("C2")</td>
+                <td>gr @Model.Weight</td>
+            </tr>
+        </table>
+    </div>
+}
+else if (Model != null && Model.RecipientName == null)
+{
+    <div class="mt-3">
+        <p class="text-center">Nessuna spedizione trovata</p></div>
+}
+
+else
+{
+    <div></div>
+}
