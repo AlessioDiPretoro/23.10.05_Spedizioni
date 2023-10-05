@@ -15,10 +15,8 @@
             <p class="control-label">Inviato da: @Model.sender.Surname @Model.sender.Name </p>
         </div>
         <div class="row row-cols-1 row-cols-md-2">
-
             @Html.Hidden("IdShipping")
             @Html.HiddenFor(model => model.IdShipping)
-
             <div class="form-group">
                 @Html.LabelFor(model => model.RecipientName, htmlAttributes: new { @class = "control-label" })
                 <div class="">

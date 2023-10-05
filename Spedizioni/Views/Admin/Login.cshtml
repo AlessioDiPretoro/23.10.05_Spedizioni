@@ -18,7 +18,6 @@
                 @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="">
@@ -26,7 +25,6 @@
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="mt-2 d-flex justify-content-center">
             <input type="submit" value="Login" class="btn btn-ok w-100" />
         </div>
@@ -37,5 +35,4 @@
             </div>
         }
     }
-
 </div>

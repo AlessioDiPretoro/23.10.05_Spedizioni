@@ -20,15 +20,13 @@
             </div>
         </div>
         <div class="row row-cols-1 row-cols-md-2">
-
             <div class="form-group" id="cfiscGroup">
-                @Html.LabelFor(model => model.codFisc, htmlAttributes: new { @class = "control-label", @for= "FiscText" })
+                @Html.LabelFor(model => model.codFisc, htmlAttributes: new { @class = "control-label", @for = "FiscText" })
                 <div class="">
                     @Html.EditorFor(model => model.codFisc, new { htmlAttributes = new { @class = "form-control", @id = "FiscText" } })
                     @Html.ValidationMessageFor(model => model.codFisc, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="form-group d-none" id="pivaGroup">
                 @Html.LabelFor(model => model.pIva, htmlAttributes: new { @class = "control-label", @for = "PIvaText" })
                 <div class="">
@@ -36,7 +34,6 @@
                     @Html.ValidationMessageFor(model => model.pIva, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="form-group">
                 @Html.LabelFor(model => model.code, htmlAttributes: new { @class = "control-label" })
                 <div class="">
