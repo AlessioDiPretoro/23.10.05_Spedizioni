@@ -28,12 +28,32 @@
                 <td>gr @Model.Weight</td>
             </tr>
         </table>
+
+        <h2>Dettagli</h2>
+        <table class="table table-hover table-bordered container text-center">
+            <tr>
+                <th>Stato</th>
+                <th>Posizione attuale</th>
+                <th>Descrizione</th>
+                <th>Data aggiornamento</th>
+            </tr>
+            @foreach (Spedizioni.Models.Details s in Model.details)
+            {
+                <tr>
+                    <td>@s.State</td>
+                    <td>@s.CurrentLocation</td>
+                    <td>@s.Description</td>
+                    <td>@s.UpdateTime</td>
+                </tr>
+            }
+        </table>
     </div>
 }
 else if (Model != null && Model.RecipientName == null)
 {
     <div class="mt-3">
-        <p class="text-center">Nessuna spedizione trovata</p></div>
+        <p class="text-center">Nessuna spedizione trovata</p>
+    </div>
 }
 
 else

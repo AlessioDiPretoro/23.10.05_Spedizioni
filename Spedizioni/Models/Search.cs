@@ -35,7 +35,7 @@ namespace Spedizioni.Models
             try
             {
                 sqlConnection.Open();
-                SqlCommand cmd = new SqlCommand($"SELECT Price, RecipientName, DestinationAddress, DestinationCity, ShippingDate, DeliveryDate, Weight, Name, Surname, CFisc, PIva FROM Shipments as S INNER JOIN Users as U on S.IdUser = U.IdUser Where code=@code", sqlConnection);
+                SqlCommand cmd = new SqlCommand($"SELECT Price, IdShipping, RecipientName, DestinationAddress, DestinationCity, ShippingDate, DeliveryDate, Weight, Name, Surname, CFisc, PIva FROM Shipments as S INNER JOIN Users as U on S.IdUser = U.IdUser Where code=@code", sqlConnection);
                 cmd.Parameters.AddWithValue("code", s.code);
                 if (s.codFisc != null)
                 {
@@ -54,6 +54,7 @@ namespace Spedizioni.Models
                     {
                         user.Surname = reader["Surname"].ToString();
                         user.Name = reader["Name"].ToString();
+                        shipment.IdShipping = Convert.ToInt32(reader["IdShipping"].ToString());
                         shipment.ShippingDate = Convert.ToDateTime(reader["ShippingDate"].ToString());
                         shipment.DeliveryDate = Convert.ToDateTime(reader["DeliveryDate"].ToString());
                         shipment.Weight = Convert.ToDouble(reader["Weight"].ToString());

@@ -28,6 +28,8 @@ namespace Spedizioni.Controllers
         public ActionResult GetShipmentPartial(Search s)
         {
             Shipments shipment = Search.SearchShip(s);
+            List<Details> d = Details.detailsByShippingId(shipment.IdShipping);
+            shipment.details = d;
             return PartialView("_GetShipmentPartial", shipment);
         }
     }

@@ -34,7 +34,7 @@ namespace Spedizioni.Models
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand($"select * FROM Details where IdShipping={id}", conn);
+                SqlCommand cmd = new SqlCommand($"select * FROM Details where IdShipping={id} ORDER BY UpdateTime Desc", conn);
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
